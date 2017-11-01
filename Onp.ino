@@ -9,9 +9,9 @@ IPAddress ip(168, 83, 20, 187);
 EthernetServer server(80);
 EthernetClient client;
 String reaString = String(100); //string for fetching data from address
-String toSave = String(25);
+String toSave = String(41);
 int addr = 0;
-byte byteArray[25];
+byte byteArray[41];
 
 bool readRequest(EthernetClient& client) {
   bool currentLineIsBlank = true;
@@ -86,7 +86,7 @@ void loop() {
     if (success && reaString.startsWith("POST")) {
       Serial.println("POST");
       Serial.println(reaString);
-      toSave = reaString.substring(7, 32);
+      toSave = reaString.substring(7, 48);
       Serial.println(toSave);
       saveString(toSave);
       toSave  = "";
@@ -119,7 +119,7 @@ void saveString(String toSave) {
 
 String readMemory(){
     String storedValues;
-    for ( addr = 0; addr <= 25; addr++) {
+    for ( addr = 0; addr <= 41; addr++) {
       byteArray[addr] = EEPROM.read(addr);
   }
   storedValues = String((char *)byteArray);
